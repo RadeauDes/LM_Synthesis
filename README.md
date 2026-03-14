@@ -1,6 +1,6 @@
 # Language-Model-Enabled Automated Multi-Step Synthesis
 
-Opentrons Flex protocols and RDKit enumeration scripts for high-throughput reaction design, execution, and post-reaction processing in support of the accompanying paper, *Language Model Enabled Automated Multi-Step Synthesis*. The experimental platform in the ESI is explicitly described as an **Opentrons Flex** automation workflow spanning **96-well amide coupling**, **SNAr chemistry**, and **multi-step synthesis**, which matches the code included here. fileciteturn1file10L1-L18
+Opentrons Flex protocols and RDKit enumeration scripts for high-throughput reaction design, execution, and post-reaction processing in support of the accompanying paper, *Language Model Enabled Automated Multi-Step Synthesis*. The experimental platform in the ESI is explicitly described as an **Opentrons Flex** automation workflow spanning **96-well amide coupling**, **SNAr chemistry**, and **multi-step synthesis**, which matches the code included here. 
 
 ## What this repository contains
 
@@ -10,21 +10,21 @@ This repo is organized around two complementary layers of the workflow:
 The RDKit scripts generate expected product sets from reagent libraries before or alongside automated execution.
 
 - **`amide_coupling_enumerator.py`**  
-  Enumerates amide products from amine and acid CSV inputs, optionally performs Boc deprotection, writes a product table, and saves a grid image of enumerated structures. fileciteturn1file13L1-L41 fileciteturn1file13L42-L84 fileciteturn1file13L85-L120
+  Enumerates amide products from amine and acid CSV inputs, optionally performs Boc deprotection, writes a product table, and saves a grid image of enumerated structures.
 - **`snar_enumerator.py`**  
-  Enumerates mono-SNAr products from amine and electrophile/core CSV inputs, writes a product table, and saves a grid image for visual review. fileciteturn1file6L1-L39 fileciteturn1file6L40-L90
+  Enumerates mono-SNAr products from amine and electrophile/core CSV inputs, writes a product table, and saves a grid image for visual review.
 
 ### 2. Opentrons Flex execution protocols
-The Opentrons scripts implement plate-based liquid handling workflows on **Flex / API 2.25**. fileciteturn1file19L1-L10 fileciteturn1file4L1-L10
+The Opentrons scripts implement plate-based liquid handling workflows on **Flex / API 2.25**. 
 
 - **`OpentronsAI_AmideCouple_20260217_0148.py`**  
-  Adds activating agent to acid-containing wells, waits 5 minutes, then adds amines and mixes. The code uses Flex 50 µL pipettes and an Axygen 96-well format. fileciteturn1file7L1-L33 fileciteturn1file0L1-L20
+  Adds activating agent to acid-containing wells, waits 5 minutes, then adds amines and mixes. The code uses Flex 50 µL pipettes and an Axygen 96-well format.
 - **`OpentronsAI__SNAr_20260224.py`**  
-  Transfers amines into electrophile plates in repeated 5 µL additions separated by 10-minute delays, followed by final mixing, matching the staged SNAr workflow described in the ESI. fileciteturn1file15L1-L9
+  Transfers amines into electrophile plates in repeated 5 µL additions separated by 10-minute delays, followed by final mixing, matching the staged SNAr workflow described in the ESI. 
 - **`OpentronsAI_Multistep_Amine_Electrophile_20260305 (1).py`**  
-  Performs column-wise amine-to-electrophile transfer with in-well mixing for multistep plate preparation. fileciteturn1file19L1-L37
+  Performs column-wise amine-to-electrophile transfer with in-well mixing for multistep plate preparation. 
 - **`OpentronsAI_Workup_20260306 (1).py`**  
-  Implements a three-plate workup sequence with two 400 µL transfer stages and a 2-minute incubation between them. fileciteturn1file4L1-L33 fileciteturn1file11L1-L24
+  Implements a three-plate workup sequence with two 400 µL transfer stages and a 2-minute incubation between them. 
 
 ## Why this repo matters
 
@@ -33,9 +33,9 @@ This codebase connects **reaction enumeration** with **robot-ready execution**:
 - build virtual product libraries from reagent CSVs,
 - map those libraries onto 96-well plate layouts,
 - execute liquid-handling workflows on Opentrons Flex,
-- and perform downstream transfer/workup steps that support multistep synthesis campaigns. fileciteturn1file13L85-L120 fileciteturn1file10L1-L18
+- and perform downstream transfer/workup steps that support multistep synthesis campaigns. 
 
-The ESI sections on **96-well amide coupling**, **SNAr data**, and **multi-step synthesis data** align directly with the code here. fileciteturn1file10L1-L18
+The ESI sections on **96-well amide coupling**, **SNAr data**, and **multi-step synthesis data** align directly with the code here.
 
 ## Repository layout
 
@@ -47,14 +47,13 @@ The ESI sections on **96-well amide coupling**, **SNAr data**, and **multi-step 
 ├── OpentronsAI_Workup_20260306 (1).py
 ├── amide_coupling_enumerator.py
 ├── snar_enumerator.py
-└── Brewster_CTX_AutoSynth_ESI.pdf
 ```
 
 ## Quick start
 
 ### Python environment for enumerators
 
-The enumeration scripts import `pandas`, `rdkit`, `argparse`, and standard RDKit drawing/utilities. fileciteturn1file13L1-L4 fileciteturn1file6L1-L4
+The enumeration scripts import `pandas`, `rdkit`, `argparse`, and standard RDKit drawing/utilities. 
 
 A practical environment is:
 
@@ -64,7 +63,7 @@ source .venv/bin/activate
 pip install pandas rdkit pillow
 ```
 
-`pillow` is included because the scripts save rendered grid images produced through RDKit image output. That dependency is inferred from the image save calls in the scripts. fileciteturn1file13L101-L120
+`pillow` is included because the scripts save rendered grid images produced through RDKit image output. That dependency is inferred from the image save calls in the scripts.
 
 ### Run the amide enumerator
 
@@ -96,7 +95,7 @@ python snar_enumerator.py \
   --output results/snar_products.csv
 ```
 
-This script also writes a CSV plus a PNG grid image. fileciteturn1file6L40-L90
+This script also writes a CSV plus a PNG grid image.
 
 ## Input formats
 
@@ -104,8 +103,7 @@ This script also writes a CSV plus a PNG grid image. fileciteturn1file6
 
 `amide_coupling_enumerator.py` expects:
 - an amine CSV with a `SMILES` column and an amine identifier such as `amine` or `Amine_ID`
-- an acid CSV with a `SMILES` column and an acid identifier such as `acid` or `Acid_ID` fileciteturn1file13L85-L120
-
+- an acid CSV with a `SMILES` column and an acid identifier such as `acid` or `Acid_ID` 
 Example:
 
 ```csv
@@ -142,7 +140,7 @@ Core_2,FC(F)(F)c1cc(Cl)nc(Cl)n1
 
 ## Running the Opentrons protocols
 
-All uploaded automation scripts declare **`robotType: Flex`** and **`apiLevel: 2.25`**, so they should be run in a compatible Opentrons Flex environment. fileciteturn1file19L7-L10 fileciteturn1file4L7-L10
+All uploaded automation scripts declare **`robotType: Flex`** and **`apiLevel: 2.25`**, so they should be run in a compatible Opentrons Flex environment.
 
 General workflow:
 
@@ -156,16 +154,16 @@ General workflow:
 ## Protocol highlights
 
 ### Amide coupling
-The amide protocol transfers **24.8 µL** of activating agent into each destination column, waits **5 minutes**, and then transfers **100 µL** of amine with mixing. fileciteturn1file0L1-L20 This matches the 96-well amide coupling workflow described in the ESI, where activated acid stocks are combined with amine stocks before overnight incubation. fileciteturn1file3L1-L18
+The amide protocol transfers **24.8 µL** of activating agent into each destination column, waits **5 minutes**, and then transfers **100 µL** of amine with mixing.This matches the 96-well amide coupling workflow described in the ESI, where activated acid stocks are combined with amine stocks before overnight incubation. 
 
 ### SNAr
-The ESI describes repeated **5 µL additions** from amine wells to electrophile plates with **10-minute waits** between additions and final mixing after the fifth addition. fileciteturn1file15L1-L9 The uploaded SNAr automation script is consistent with that staged addition design.
+The ESI describes repeated **5 µL additions** from amine wells to electrophile plates with **10-minute waits** between additions and final mixing after the fifth addition. The uploaded SNAr automation script is consistent with that staged addition design.
 
 ### Multistep transfer
 The multistep transfer protocol performs column-wise transfer from an amine plate into a matched electrophile plate using the Flex 8-channel 50 µL pipette and includes in-well mixing after dispense. fileciteturn1file19L11-L37
 
 ### Workup
-The workup protocol performs two consecutive **400 µL** plate-to-plate transfers using repeated 50 µL aspiration/dispense cycles, with a **2-minute delay** between stages. fileciteturn1file11L1-L24
+The workup protocol performs two consecutive **400 µL** plate-to-plate transfers using repeated 50 µL aspiration/dispense cycles, with a **2-minute delay** between stages.
 
 ## Example use cases
 
@@ -189,4 +187,4 @@ The workup protocol performs two consecutive **400 µL** plate-to-plate transfer
 If you use or adapt this work, cite the associated manuscript:
 
 **Language Model Enabled Automated Multi-Step Synthesis**  
-Patrick M. Doerner Barbour, Gregory D. Thiabaud, and James T. Brewster II. fileciteturn1file10L1-L5
+Patrick M. Doerner Barbour, Gregory D. Thiabaud, and James T. Brewster II.
